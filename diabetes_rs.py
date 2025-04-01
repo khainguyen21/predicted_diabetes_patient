@@ -6,6 +6,9 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV
+
+from lazypredict.Supervised import LazyClassifier
 
 from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score
 from sklearn.metrics import classification_report
@@ -49,24 +52,54 @@ x_train = scaler.fit_transform(x_train)
 x_test = scaler.transform(x_test)
 
 # Fit support vector machine model
-# SVCmodel = SVC()
-# SVCmodel.fit(x_train, y_train)
-# y_predict = SVCmodel.predict(x_test)
+# model = SVC()
+# model.fit(x_train, y_train)
+# y_predict = model.predict(x_test)
 
 # Fit logistic regression model
-# LRmodel = LogisticRegression()
-# LRmodel.fit(x_train, y_train)
-# y_predict = LRmodel.predict(x_test)
+# model = LogisticRegression()
+# model.fit(x_train, y_train)
+# y_predict = model.predict(x_test)
 
 # Fit random forest model
-RDmodel = RandomForestClassifier()
-RDmodel.fit(x_train, y_train)
-y_predict = RDmodel.predict(x_test)
+# model = RandomForestClassifier()
+# model.fit(x_train, y_train)
+# y_predict = model.predict(x_test)
 
+# params = {
+#     "n_estimators" : [50, 100, 200],
+#     "criterion" : ["gini", "entropy", "log_loss"],
+#     "max_depth": [None, 2, 5]
+# }
+#
+# # Find the most optimal hyper parament for a model
+# GridSCVModel = GridSearchCV(
+#     # What model you use
+#     estimator= RandomForestClassifier(random_state=42),
+#
+#     # What hyperparameter you use
+#     param_grid= params,
+#
+#     # What metric you evaluate
+#     scoring= "precision",
+#
+#     # How many times of k fold cross validation
+#     cv=6,
+#     verbose= 2,
+#
+#     # How many threads (processors) that you want to use
+#     #n_jobs= 8
+# )
+# GridSCVModel.fit(x_train, y_train)
+# y_predict =GridSCVModel.predict(x_test)
+# print(GridSCVModel.best_score_, GridSCVModel.best_params_)
 
-print(type(y_predict))
-for i, j in zip(y_predict, y_test):
-    print(f"Prediction: {i}. Actual values: {j}")
+clf = LazyClassifier(verbose=0,ignore_warnings=True, custom_metric=None)
+models,predictions = clf.fit(x_train, x_test, y_train, y_test)
+
+print(x_test)
+# for i, j in zip(y_predict, y_test):
+#     print(f"Prediction: {i}. Actual values: {j}")
 
 # threshold = 0.3
 #
@@ -84,7 +117,7 @@ for i, j in zip(y_predict, y_test):
 # Use the classification report
 # We want to focus in recall for class 1 because we want to get as many patient with potential of cancer as we can
 
-print(f"{classification_report(y_test, y_predict)}")
+#print(f"{classification_report(y_test, y_predict)}")
 
 
 
