@@ -8,7 +8,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 
-from lazypredict.Supervised import LazyClassifier
+#from lazypredict.Supervised import LazyClassifier
 
 from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score
 from sklearn.metrics import classification_report
@@ -56,10 +56,12 @@ x_test = scaler.transform(x_test)
 # model.fit(x_train, y_train)
 # y_predict = model.predict(x_test)
 
-# Fit logistic regression model
-# model = LogisticRegression()
-# model.fit(x_train, y_train)
-# y_predict = model.predict(x_test)
+# Initialize logistic regression model
+model = LogisticRegression()
+# Training model
+model.fit(x_train, y_train)
+# Predict with test set
+y_predict = model.predict(x_test)
 
 # Fit random forest model
 # model = RandomForestClassifier()
@@ -72,7 +74,7 @@ x_test = scaler.transform(x_test)
 #     "max_depth": [None, 2, 5]
 # }
 #
-# # Find the most optimal hyper parament for a model
+# # Find the most optimal hyper parameters (that we specify in params) for a model
 # GridSCVModel = GridSearchCV(
 #     # What model you use
 #     estimator= RandomForestClassifier(random_state=42),
@@ -94,12 +96,12 @@ x_test = scaler.transform(x_test)
 # y_predict =GridSCVModel.predict(x_test)
 # print(GridSCVModel.best_score_, GridSCVModel.best_params_)
 
-clf = LazyClassifier(verbose=0,ignore_warnings=True, custom_metric=None)
-models,predictions = clf.fit(x_train, x_test, y_train, y_test)
+# This LazyClassifier will run every model in machine learning and display from the best to the worst model
+# clf = LazyClassifier(verbose=0,ignore_warnings=True, custom_metric=None)
+# models,predictions = clf.fit(x_train, x_test, y_train, y_test)
 
-print(x_test)
-# for i, j in zip(y_predict, y_test):
-#     print(f"Prediction: {i}. Actual values: {j}")
+for i, j in zip(y_predict, y_test):
+    print(f"Prediction: {i}. Actual values: {j}")
 
 # threshold = 0.3
 #
@@ -117,7 +119,7 @@ print(x_test)
 # Use the classification report
 # We want to focus in recall for class 1 because we want to get as many patient with potential of cancer as we can
 
-#print(f"{classification_report(y_test, y_predict)}")
+print(f"{classification_report(y_test, y_predict)}")
 
 
 
