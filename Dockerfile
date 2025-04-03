@@ -1,5 +1,6 @@
 FROM ubuntu:latest
 
+# Direct to src if avaiable, if not create folder named src
 WORKDIR /src
 
 # Install necessary dependencies
@@ -23,4 +24,6 @@ ENV PATH="/src/myenv/bin:$PATH"
 COPY diabetes_rs.py ./diabetes_rs.py
 COPY diabetes.csv ./diabetes.csv
 
-# Default command: Open a shell
+# Default command (this is very last step, when done with everything RUN and COPY, then run this command "python3 diabetes_rs.py"
+# It will run the python script)
+CMD ["python3", "diabetes_rs.py"]
