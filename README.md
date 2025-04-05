@@ -5,3 +5,5 @@
 
 #### Model deployment
 - Practicing with Pickle library and Docker 
+
+#### Download the html files to see the overview of data set
