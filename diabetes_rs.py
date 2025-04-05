@@ -70,39 +70,39 @@ x_test = scaler.transform(x_test)
 # model.fit(x_train, y_train)
 # y_predict = model.predict(x_test)
 
-params = {
-    "n_estimators" : [50, 100, 200],
-    "criterion" : ["gini", "entropy", "log_loss"],
-    "max_depth": [None, 2, 5]
-}
-
-# Find the most optimal hyper parameters (that we specify in params) for a model
-GridSCVModel = GridSearchCV(
-    # What model you use
-    estimator= RandomForestClassifier(random_state=42),
-
-    # What hyperparameter you use
-    param_grid= params,
-
-    # What metric you evaluate
-    scoring= "precision",
-
-    # How many times of k fold cross validation
-    cv=6,
-    verbose= 1,
-
-    # How many threads (processors) that you want to use
-    #n_jobs= 8
-)
-GridSCVModel.fit(x_train, y_train)
-y_predict =GridSCVModel.predict(x_test)
-print("Best score: ", GridSCVModel.best_score_)
-print("Best parameters: ", GridSCVModel.best_params_)
-
-# # This LazyClassifier will run every model in machine learning and display from the best to the worst model
-# clf = LazyClassifier(verbose=0,ignore_warnings=True, custom_metric=None)
-# models,predictions = clf.fit(x_train, x_test, y_train, y_test)
+# params = {
+#     "n_estimators" : [50, 100, 200],
+#     "criterion" : ["gini", "entropy", "log_loss"],
+#     "max_depth": [None, 2, 5]
+# }
 #
+# # Find the most optimal hyperparameters (that we specify in params) for a model
+# GridSCVModel = GridSearchCV(
+#     # What model you use
+#     estimator= RandomForestClassifier(random_state=42),
+#
+#     # What hyperparameter you use
+#     param_grid= params,
+#
+#     # What metric you evaluate
+#     scoring= "precision",
+#
+#     # How many times of k fold cross validation
+#     cv=6,
+#     verbose= 1,
+#
+#     # How many threads (processors) that you want to use
+#     #n_jobs= 8
+# )
+# GridSCVModel.fit(x_train, y_train)
+# y_predict =GridSCVModel.predict(x_test)
+# print("Best score: ", GridSCVModel.best_score_)
+# print("Best parameters: ", GridSCVModel.best_params_)
+
+# This LazyClassifier will run every model in machine learning and display from the best to the worst model
+clf = LazyClassifier(verbose=0,ignore_warnings=True, custom_metric=None)
+models,predictions = clf.fit(x_train, x_test, y_train, y_test)
+
 # for i, j in zip(y_predict, y_test):
 #     print(f"Prediction: {i}. Actual values: {j}")
 
@@ -121,8 +121,7 @@ print("Best parameters: ", GridSCVModel.best_params_)
 
 # Use the classification report
 # We want to focus in recall for class 1 because we want to get as many patient with potential of cancer as we can
-
-print(f"{classification_report(y_test, y_predict)}")
+# print(f"{classification_report(y_test, y_predict)}")
 
 # with open("model.pkl", "wb") as f:
 #     pickle.dump(model, f)
