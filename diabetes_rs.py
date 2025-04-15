@@ -8,7 +8,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 
-from lazypredict.Supervised import LazyClassifier
+#from lazypredict.Supervised import LazyClassifier
 
 from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score
 from sklearn.metrics import classification_report
@@ -66,9 +66,9 @@ x_test = scaler.transform(x_test)
 # y_predict = model.predict(x_test)
 
 # Fit random forest model
-# model = RandomForestClassifier()
-# model.fit(x_train, y_train)
-# y_predict = model.predict(x_test)
+model = RandomForestClassifier()
+model.fit(x_train, y_train)
+y_predict = model.predict(x_test)
 
 # params = {
 #     "n_estimators" : [50, 100, 200],
@@ -100,8 +100,8 @@ x_test = scaler.transform(x_test)
 # print("Best parameters: ", GridSCVModel.best_params_)
 
 # This LazyClassifier will run every model in machine learning and display from the best to the worst model
-clf = LazyClassifier(verbose=0,ignore_warnings=True, custom_metric=None)
-models,predictions = clf.fit(x_train, x_test, y_train, y_test)
+# clf = LazyClassifier(verbose=0,ignore_warnings=True, custom_metric=None)
+# models,predictions = clf.fit(x_train, x_test, y_train, y_test)
 
 # for i, j in zip(y_predict, y_test):
 #     print(f"Prediction: {i}. Actual values: {j}")
@@ -123,7 +123,7 @@ models,predictions = clf.fit(x_train, x_test, y_train, y_test)
 # We want to focus in recall for class 1 because we want to get as many patient with potential of cancer as we can
 # print(f"{classification_report(y_test, y_predict)}")
 
-# with open("model.pkl", "wb") as f:
-#     pickle.dump(model, f)
+with open("model.pkl", "wb") as f:
+    pickle.dump(model, f)
 
 
