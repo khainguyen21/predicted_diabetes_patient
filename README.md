@@ -25,7 +25,7 @@ The file `diabetes.csv` is the **Pima Indians Diabetes** dataset.
 | Age | Age in years |
 | Outcome | 1 = diabetes, 0 = no diabetes |
 
-`diabetes.html` is a data report made with `ydata_profiling`. Open it in a web browser to see charts and statistics for each column.
+You can make a full data report (charts and statistics for each column) with `ydata_profiling`. Uncomment the `ProfileReport` lines in `diabetes_rs.py` to create `diabetes.html`, then open it in a web browser.
 
 ## Files in this project
 
@@ -35,7 +35,6 @@ The file `diabetes.csv` is the **Pima Indians Diabetes** dataset.
 | `test_model.py` | Loads `model.pkl` and makes a prediction for one example patient |
 | `model.pkl` | The saved, trained model (Random Forest) |
 | `diabetes.csv` | The dataset |
-| `diabetes.html` | Data profile report |
 | `Dockerfile` | Runs `diabetes_rs.py` inside a Docker container |
 
 ## How the testing works
