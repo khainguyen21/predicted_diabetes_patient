@@ -114,10 +114,10 @@ y_predict = model.predict(x_test)
 #     else:
 #         print("Class 0")
 
-# print(f"Acc: {accuracy_score(y_test, y_predict)}")
-# print(f"Precision: {precision_score(y_test, y_predict)}")
-# print(f"Recall: {recall_score(y_test, y_predict)}")
-# print(f"F1 score: {f1_score(y_test, y_predict)}")
+print(f"Acc: {accuracy_score(y_test, y_predict)}")
+print(f"Precision: {precision_score(y_test, y_predict)}")
+print(f"Recall: {recall_score(y_test, y_predict)}")
+print(f"F1 score: {f1_score(y_test, y_predict)}")
 
 # Use the classification report
 # We want to focus in recall for class 1 because we want to get as many patient with potential of cancer as we can
