@@ -139,5 +139,6 @@ docker run diabetes-app
 
 ## Known issues
 
-- The model was trained on **scaled numbers** (from `StandardScaler`), so new patient data must be scaled the same way before predicting. `test_model.py` does this by rebuilding the scaler from `diabetes.csv` with the same split as `diabetes_rs.py`. If you change the split in `diabetes_rs.py`, change it in `test_model.py` too.
+- `test_model.py` gives the model **raw numbers**, but the model was trained on **scaled numbers** (from `StandardScaler`). This can give wrong answers. For example, the sample patient in the file (glucose 75, BMI 26.6) is predicted as "diabetes" with raw numbers, but "no diabetes" when the numbers are scaled correctly. To fix it, save the scaler together with the model and use it in `test_model.py`.
+- The messages in `test_model.py` say "cancer", but this project is about **diabetes**.
 - Some columns (like `Glucose`, `BloodPressure`, `BMI` and `Insulin`) have `0` values, which are not possible in real life. They are probably missing values and could be cleaned up to improve results.
